@@ -27,7 +27,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.shashank.sony.fancytoastlib.FancyToast;
 import com.squareup.picasso.Picasso;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -46,6 +48,7 @@ public class ImageUpload extends AppCompatActivity {
     private DatabaseReference mDatabaseRef;
     Intent editImage ;
     SharedPreferences sharedPreferences;
+    private StorageTask mUploadTask;
     String savedName,savedEmailId,savedIdToken,savedUserId, getUri;
     String uploadIdReceived,uploadId;
 
@@ -78,7 +81,7 @@ public class ImageUpload extends AppCompatActivity {
             editImage = getIntent();
             String titleReceive = editImage.getStringExtra("title");
             String descriptionReceive = editImage.getStringExtra("description");
-            final String imageUrlReceived = editImage.getStringExtra("imageUrl");
+            String imageUrlReceived = editImage.getStringExtra("imageUrl");
 
             uploadIdReceived = editImage.getStringExtra("uploadid");
             if(titleReceive != null && descriptionReceive!=null && imageUrlReceived!=null && uploadIdReceived !=null)
@@ -99,7 +102,14 @@ public class ImageUpload extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        uploadImageFile();
+                        if (mUploadTask != null && mUploadTask.isInProgress()) {
+
+                            FancyToast.makeText(ImageUpload.this, "Upload in progress",FancyToast.LENGTH_LONG,FancyToast.INFO,false).show();
+
+                        } else {
+                            uploadImageFile();
+                        }
+
 
                     }
                 });
@@ -108,8 +118,12 @@ public class ImageUpload extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        openImagesActivity();
+                        if (mUploadTask != null && mUploadTask.isInProgress()) {
+                            FancyToast.makeText(ImageUpload.this, "Upload in progress",FancyToast.LENGTH_LONG,FancyToast.INFO,false).show();
+                        } else {
 
+                            openImagesActivity();
+                        }
                     }
                 });
 
@@ -126,7 +140,11 @@ public class ImageUpload extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    uploadImageFile();
+                    if (mUploadTask != null && mUploadTask.isInProgress()) {
+                        FancyToast.makeText(ImageUpload.this, "Upload in progress",FancyToast.LENGTH_LONG,FancyToast.INFO,false).show();
+                    } else {
+                        uploadImageFile();
+                    }
 
                 }
             });
@@ -135,8 +153,11 @@ public class ImageUpload extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    openImagesActivity();
-
+                    if (mUploadTask != null && mUploadTask.isInProgress()) {
+                        FancyToast.makeText(ImageUpload.this, "Upload in progress",FancyToast.LENGTH_LONG,FancyToast.INFO,false).show();
+                    } else {
+                        openImagesActivity();
+                    }
                 }
             });
 
@@ -176,7 +197,7 @@ public class ImageUpload extends AppCompatActivity {
         if (mImageUri != null) {
 
             imageReference = mStorageRef.child(System.currentTimeMillis()+"."+getImageFileExtension(mImageUri));
-            imageReference.putFile(mImageUri)
+            mUploadTask = imageReference.putFile(mImageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -190,9 +211,8 @@ public class ImageUpload extends AppCompatActivity {
                                     mEditTextFileName.getText().clear();
                                     descriptionView.getText().clear();
                                 }
-                            },600);
-                            Toast.makeText(ImageUpload.this, "Upload Successful!!", Toast.LENGTH_SHORT).show();
-
+                            },500);
+                            FancyToast.makeText(ImageUpload.this, "Upload Successful!!",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false).show();
                             Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
                             while(!uri.isComplete());
 
@@ -225,8 +245,7 @@ public class ImageUpload extends AppCompatActivity {
                         }
                     });
         }else{
-            Toast.makeText(this, "Please Select Image", Toast.LENGTH_SHORT).show();
-        }
+            FancyToast.makeText(ImageUpload.this, "Please click on Image and add Image from Gallery..",FancyToast.LENGTH_LONG,FancyToast.ERROR,false).show(); }
 
 
     }
