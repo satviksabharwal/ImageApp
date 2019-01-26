@@ -152,18 +152,18 @@ public class ImageUpload extends AppCompatActivity {
                             },600);
                             Toast.makeText(ImageUpload.this, "Upload Successful!!", Toast.LENGTH_SHORT).show();
 
-                            imageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                 //
-                                }
-                            });
+                            Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
+                            while(!uri.isComplete());
 
-                            Upload upload = new Upload(mEditTextFileName.getText().toString().trim(), getUri ,descriptionView.getText().toString().trim());
-                            String uploadId = mDatabaseRef.push().getKey();
-                            mDatabaseRef.child(savedEmailId).child(uploadId).setValue(upload);
+                                Uri url = uri.getResult();
+                                Upload upload = new Upload(mEditTextFileName.getText().toString().trim(), url.toString() ,descriptionView.getText().toString().trim());
+                                String uploadId = mDatabaseRef.push().getKey();
+                                mDatabaseRef.child(savedEmailId).child(uploadId).setValue(upload);
 
-                        }})
+
+
+
+   }})
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
