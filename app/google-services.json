@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "741490494035",
+    "firebase_url": "https://authentication-911ec.firebaseio.com",
+    "project_id": "authentication-911ec",
+    "storage_bucket": "authentication-911ec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:741490494035:android:163901ab4e423d3f",
+        "android_client_info": {
+          "package_name": "com.example.satvi.googleauthentication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "741490494035-o07qce92ejejkhic62b5a7jr8a0ic4v9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.satvi.googleauthentication",
+            "certificate_hash": "b2f5359ebcaae7c3eaff94534f568fdc8937f7eb"
+          }
+        },
+        {
+          "client_id": "741490494035-o7nnnec3f2n2ida3r969sdqknfbmo9kp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVQ0jKjH6UG9Ln4_v3rUQoXpKDYoyhze0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "741490494035-o7nnnec3f2n2ida3r969sdqknfbmo9kp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
