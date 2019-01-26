@@ -6,12 +6,13 @@ public class Upload {
     private String title;
     private String imageUrl;
     private String description;
+    private String uploadId;
 
     public Upload() {
 
     }
 
-    public Upload(String title, String imageUrl, String description) {
+    public Upload(String title, String imageUrl, String description,String uploadId) {
 
         if (title.trim().equals("")) {
             title = "No Title";
@@ -23,6 +24,7 @@ public class Upload {
         this.title = title;
         this.imageUrl = imageUrl;
         this.description = description;
+        this.uploadId = uploadId;
     }
 
     // public Upload(String title,String imageUrl, String description){
@@ -50,5 +52,13 @@ public class Upload {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getUploadId() {
+        return uploadId;
+    }
+
+    public void setUploadId(String uploadId) {
+        this.uploadId = uploadId;
     }
 }
