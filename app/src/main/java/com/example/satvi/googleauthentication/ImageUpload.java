@@ -44,16 +44,26 @@ public class ImageUpload extends AppCompatActivity {
     private ProgressBar mProgressBar;
     private StorageReference mStorageRef,imageReference;
     private DatabaseReference mDatabaseRef;
-
+    Intent editImage ;
     SharedPreferences sharedPreferences;
     String savedName,savedEmailId,savedIdToken,savedUserId, getUri;
+    String uploadIdReceived,uploadId;
 
-    private Uri mImageUri;
+
+    private Uri mImageUri,myUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_upload);
+        descriptionView = findViewById(R.id.descriptionView);
+        mButtonUpload = findViewById(R.id.button_upload);
+        mShowUploads = findViewById(R.id.text_view_show_uploads);
+        mEditTextFileName = findViewById(R.id.edit_text_file_name);
+        mImageView = findViewById(R.id.image_view);
+        mProgressBar = findViewById(R.id.progress_bar);
+        mStorageRef = FirebaseStorage.getInstance().getReference("EmailId/");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("EmailId/");
 
         sharedPreferences = getApplicationContext().getSharedPreferences("com.example.satvi.googleauthentication", Context.MODE_PRIVATE);
         savedName = sharedPreferences.getString("DisplayName", " ");
@@ -65,15 +75,46 @@ public class ImageUpload extends AppCompatActivity {
             startActivity(intent);
             finish();
         } else {
+            editImage = getIntent();
+            String titleReceive = editImage.getStringExtra("title");
+            String descriptionReceive = editImage.getStringExtra("description");
+            final String imageUrlReceived = editImage.getStringExtra("imageUrl");
 
-            descriptionView = findViewById(R.id.descriptionView);
-            mButtonUpload = findViewById(R.id.button_upload);
-            mShowUploads = findViewById(R.id.text_view_show_uploads);
-            mEditTextFileName = findViewById(R.id.edit_text_file_name);
-            mImageView = findViewById(R.id.image_view);
-            mProgressBar = findViewById(R.id.progress_bar);
-            mStorageRef = FirebaseStorage.getInstance().getReference("EmailId/");
-            mDatabaseRef = FirebaseDatabase.getInstance().getReference("EmailId/");
+            uploadIdReceived = editImage.getStringExtra("uploadid");
+            if(titleReceive != null && descriptionReceive!=null && imageUrlReceived!=null && uploadIdReceived !=null)
+            {
+
+                mEditTextFileName.setText(titleReceive);
+                descriptionView.setText(descriptionReceive);
+               // Picasso.get().load(imageUrlReceived).fit().into(mImageView);
+
+                mImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        updateImg();
+                    }
+                });
+
+                mButtonUpload.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        uploadImageFile();
+
+                    }
+                });
+
+                mShowUploads.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        openImagesActivity();
+
+                    }
+                });
+
+            }
+
             mImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -156,9 +197,14 @@ public class ImageUpload extends AppCompatActivity {
                             while(!uri.isComplete());
 
                                 Uri url = uri.getResult();
-                                Upload upload = new Upload(mEditTextFileName.getText().toString().trim(), url.toString() ,descriptionView.getText().toString().trim());
-                                String uploadId = mDatabaseRef.push().getKey();
-                                mDatabaseRef.child(savedEmailId).child(uploadId).setValue(upload);
+                            if(uploadIdReceived==null) {
+                                uploadId = mDatabaseRef.push().getKey();
+                            }else{
+                                uploadId = uploadIdReceived;
+                                uploadIdReceived = null;
+                            }
+                            Upload upload = new Upload(mEditTextFileName.getText().toString().trim(), url.toString() ,descriptionView.getText().toString().trim(),uploadId);
+                            mDatabaseRef.child(savedEmailId).child(uploadId).setValue(upload);
 
 
 
@@ -191,27 +237,5 @@ public class ImageUpload extends AppCompatActivity {
 
     }
 
-
-    /*private void uploadImageToFirebase(InputStream rInputStream) {
-        sharedPref = getPreferences(MODE_PRIVATE);
-        String UserId = sharedPref.getString("firebasekey", "1");
-        StorageReference storageRef =
-                FirebaseStorage.getInstance().getReference();
-        StorageReference mountainsRef = storageRef.child("uploads/"+UserId+System.currentTimeMillis());
-        // running the task
-        UploadTask uploadTask = mountainsRef.putStream(rInputStream);
-
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                // show error
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // do ui stuff
-            }
-        });
-    }*/
 
 }

@@ -1,12 +1,16 @@
 package com.example.satvi.googleauthentication;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -95,6 +99,76 @@ public class AccountActivity extends AppCompatActivity {
             }
         };
         listView.setAdapter(adapter);
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                final Upload up = (Upload) parent.getItemAtPosition(position);
+                final String j =  up.getUploadId();
+
+                new AlertDialog.Builder(AccountActivity.this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Are you sure?")
+                        .setPositiveButton("Update", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(AccountActivity.this,ImageUpload.class);
+
+                                intent.putExtra("title",up.getTitle());
+                                intent.putExtra("imageUrl",up.getImageUrl());
+                                intent.putExtra("description",up.getDescription());
+                                intent.putExtra("uploadid",up.getUploadId());
+                                startActivity(intent);
+                                finish();
+                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("EmailId");
+                                Query deleteQuery = ref.child(savedEmailId).child(up.getUploadId()).equalTo(j);
+
+                                deleteQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                        dataSnapshot.getRef().child("title").removeValue();
+                                        dataSnapshot.getRef().child("imageUrl").removeValue();
+                                        dataSnapshot.getRef().child("description").removeValue();
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+                                        Log.e("AccountActivity", "onCancelled", databaseError.toException());
+                                    }
+                                });
+
+                            }
+                        })
+                        .setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+
+                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("EmailId");
+                                Query deleteQuery = ref.child(savedEmailId).child(up.getUploadId()).equalTo(j);
+
+                                deleteQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                        dataSnapshot.getRef().removeValue();
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+                                        Log.e("AccountActivity", "onCancelled", databaseError.toException());
+                                    }
+                                });
+
+                            }
+                        }).show();
+
+
+                return true;
+            }
+        });
 
     }
 
