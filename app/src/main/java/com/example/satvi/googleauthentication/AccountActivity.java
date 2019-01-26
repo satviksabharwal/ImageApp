@@ -177,6 +177,7 @@ public class AccountActivity extends AppCompatActivity {
         super.onStart();
         mAuth.addAuthStateListener(mAuthStateListener);
         adapter.startListening();
+
     }
 
     @Override
