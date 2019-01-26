@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:orientation="vertical"
-    tools:context=".ImageUpload">
+    tools:context=".ImageUpload"
+    android:background="@drawable/opacitybackground">
 
     <EditText
         android:id="@+id/edit_text_file_name"
@@ -18,8 +19,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="20dp"
+        android:background="@drawable/bg_edittext_icon"
         app:layout_constraintBottom_toTopOf="@id/image_view"
         android:layout_marginBottom="20dp"
+        android:textColor="#01579B"
         android:gravity="center"
         android:hint="Title"
         android:textSize="24sp"
@@ -27,14 +30,14 @@
 
     <ImageView
         android:id="@+id/image_view"
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="200dp"
-        android:layout_gravity="center"
+        android:layout_gravity="fill"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="15dp"
         android:layout_marginBottom="20dp"
-        android:background="@android:drawable/ic_menu_gallery"
+        android:background="@drawable/icon"
         android:padding="5dp"
         app:layout_constraintBottom_toTopOf="@id/descriptionView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,6 +62,8 @@
         android:gravity="center"
         android:textSize="18sp"
         android:hint="Description"
+        android:textColor="#0288D1"
+        android:background="@drawable/bg_edittext_icon"
         android:inputType="textMultiLine" />
 
     <ProgressBar
