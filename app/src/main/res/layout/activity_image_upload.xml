@@ -4,60 +4,81 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     android:orientation="vertical"
     tools:context=".ImageUpload"
     android:background="@drawable/opacitybackground">
 
-    <EditText
-        android:id="@+id/edit_text_file_name"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
+        app:cardElevation="10dp"
+        android:id="@+id/you"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_edittext_icon"
-        app:layout_constraintBottom_toTopOf="@id/image_view"
-        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@id/we3"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="10dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp">
+    <EditText
+        android:id="@+id/edit_text_file_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:textColor="#01579B"
         android:gravity="center"
         android:hint="Title"
-        android:textSize="24sp"
+        android:textSize="22sp"
         android:textStyle="bold"/>
 
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardElevation="10dp"
+        android:id="@+id/we3"
+        app:cardCornerRadius="50dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@id/we"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/you">
     <ImageView
         android:id="@+id/image_view"
         android:layout_width="250dp"
         android:layout_height="200dp"
         android:layout_gravity="fill"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="20dp"
         android:background="@drawable/icon"
-        android:padding="5dp"
-        app:layout_constraintBottom_toTopOf="@id/descriptionView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_text_file_name" />
+        android:padding="5dp" />
+    </android.support.v7.widget.CardView>
 
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:id="@+id/we"
+        android:layout_height="wrap_content"
+        app:cardElevation="10dp"
+        app:cardCornerRadius="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/we3"
+        app:layout_constraintBottom_toTopOf="@id/progress_bar"
+        >
     <EditText
         android:id="@+id/descriptionView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:ems="10"
         android:padding="5dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image_view"
-        app:layout_constraintBottom_toTopOf="@id/progress_bar"
         android:textStyle="bold|italic"
         android:gravity="center"
         android:textSize="18sp"
@@ -65,6 +86,7 @@
         android:textColor="#0288D1"
         android:background="@drawable/bg_edittext_icon"
         android:inputType="textMultiLine" />
+    </android.support.v7.widget.CardView>
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -77,12 +99,12 @@
         android:layout_marginLeft="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/descriptionView"
+        app:layout_constraintTop_toBottomOf="@id/we"
         app:layout_constraintBottom_toTopOf="@id/linearLayout"
         android:layout_alignParentStart="true"
       />
 <LinearLayout
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="50dp"
     android:orientation="horizontal"
     android:layout_gravity="center"
@@ -99,7 +121,7 @@
     >
     <Button
         android:id="@+id/button_upload"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
@@ -112,7 +134,7 @@
 
     <Button
         android:id="@+id/text_view_show_uploads"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="25dp"
         android:layout_toEndOf="@+id/button_upload"
