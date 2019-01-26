@@ -13,8 +13,8 @@
         android:id="@+id/edit_text_file_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -83,14 +83,14 @@
       />
 <LinearLayout
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="50dp"
     android:orientation="horizontal"
     android:layout_gravity="center"
     android:id="@+id/linearLayout"
     android:layout_marginTop="20dp"
     android:layout_marginBottom="20dp"
-    android:layout_marginRight="15dp"
-    android:layout_marginLeft="15dp"
+    android:layout_marginRight="30dp"
+    android:layout_marginLeft="30dp"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toBottomOf="@id/progress_bar"
@@ -100,20 +100,30 @@
     <Button
         android:id="@+id/button_upload"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="Upload"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:layout_weight="1"
+        android:background="@drawable/buttonnew"
         />
 
     <Button
         android:id="@+id/text_view_show_uploads"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginStart="25dp"
         android:layout_toEndOf="@+id/button_upload"
         android:gravity="center"
         android:text="Show Uploads"
+        android:padding="5dp"
+        android:layout_weight="1"
+        android:textColor="#ffffff"
+        android:textSize="15sp"
+        android:background="@drawable/buttonnew"
+
         />
 </LinearLayout>
 
