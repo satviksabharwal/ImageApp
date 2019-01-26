@@ -8,6 +8,7 @@
     android:id="@+id/mainId"
     >
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,15 +27,21 @@
             android:id="@+id/pictureImageView"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_weight="2"
-
+            android:layout_weight="3"
             tools:srcCompat="@tools:sample/avatars[0]"
             android:layout_gravity="fill"/>
 
+        <TextView
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+
+            android:background="#000000"
+            android:textColor="#000000"></TextView>
+
         <LinearLayout
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:orientation="vertical">
 
             <TextView
@@ -49,6 +56,13 @@
                 android:textStyle="bold"
                 android:textColor="#01579B"
                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="#000000"
+                android:id="@+id/uploadIdTextView"
+                android:textColor="#000000"
+                />
 
             <TextView
                 android:id="@+id/descriptionTextView"
@@ -65,4 +79,5 @@
         </LinearLayout>
 
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

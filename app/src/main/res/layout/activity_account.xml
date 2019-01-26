@@ -7,29 +7,41 @@
     tools:context=".AccountActivity"
     android:background="@drawable/opacitybackground">
 
-    <Button
-        android:id="@+id/logoutButton"
+    <android.support.v7.widget.CardView
+        android:id="@+id/we2"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/buttonnew"
-        android:gravity="center"
-        android:textSize="25sp"
-        android:padding="5dp"
-        android:text="Logout"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="30dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_centerHorizontal="true"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/logoutButton"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignTop="@+id/we2"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/buttonnew"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="Logout"
+            android:textColor="#ffffff"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+    </android.support.v7.widget.CardView>
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/listView"
-        android:layout_below="@id/logoutButton"
-        android:layout_marginTop="20dp"></ListView>
+        android:layout_below="@id/we2"
+        android:layout_marginTop="10dp"></ListView>
 
 </RelativeLayout>
