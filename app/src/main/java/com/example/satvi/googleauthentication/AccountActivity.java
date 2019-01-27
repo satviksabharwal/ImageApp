@@ -75,7 +75,7 @@ public class AccountActivity extends AppCompatActivity {
 
         // adding element in list
         listView = findViewById(R.id.listView);
-        Query query = FirebaseDatabase.getInstance().getReference("EmailId").child(savedEmailId);
+        Query query = FirebaseDatabase.getInstance().getReference("EmailId").child(savedUserId);
         FirebaseListOptions<Upload> options = new FirebaseListOptions.Builder<Upload>()
                 .setLayout(R.layout.itemrow)
                 .setQuery(query, Upload.class)

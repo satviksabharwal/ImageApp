@@ -224,7 +224,7 @@ public class ImageUpload extends AppCompatActivity {
                                 uploadIdReceived = null;
                             }
                             Upload upload = new Upload(mEditTextFileName.getText().toString().trim(), url.toString() ,descriptionView.getText().toString().trim(),uploadId);
-                            mDatabaseRef.child(savedEmailId).child(uploadId).setValue(upload);
+                            mDatabaseRef.child(savedUserId).child(uploadId).setValue(upload);
 
 
 

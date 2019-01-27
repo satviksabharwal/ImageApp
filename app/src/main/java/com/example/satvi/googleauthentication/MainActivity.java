@@ -3,6 +3,7 @@ package com.example.satvi.googleauthentication;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private static final String TAG = "Main Activity";
     private FirebaseAuth.AuthStateListener mAuthListener;
-    String idToken,emailId,displayName,userId,idFirebase,emailI;
+    String idToken,emailId,displayName,userId;
+    Uri photoUrl;
     SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,10 +98,10 @@ public class MainActivity extends AppCompatActivity {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 if(account!=null) {
                     idToken = account.getIdToken();
-                    emailI = account.getEmail();
+                    emailId = account.getEmail();
                     displayName = account.getDisplayName();
                     userId = account.getId();
-                    emailId = emailI.replace("@gmail.com","");
+                    photoUrl = account.getPhotoUrl();
                 }
                 sharedPreferences = getApplicationContext().getSharedPreferences("com.example.satvi.googleauthentication",MODE_PRIVATE);
                 sharedPreferences.edit().putString("idToken",idToken).apply();
